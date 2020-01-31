@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/add.css">
+</head>
+<body>
+    <p class="notify">Notify me when BTC reaches..</p>
+
+    <div class="row2">
+        <div>
+            <input id="notifyVal" placeholder="USD">
+        </div>
+        <button id="updateBtn">Update</button>
+    </div>
+
+    <a id="closeBtn">Close Window</a><br>
+
+   
+</body>
+
+</html>
+
+
+<script>
+
+const electron = require('electron')
+const path = require('path')
+const remote = electron.remote
+const ipc = electron.ipcRenderer
+
+const closeBtn = document.getElementById('closeBtn');
+const updateBtn =document.getElementById('updateBtn');
+
+
+closeBtn.addEventListener('click', function(event) {
+    console.log('close button triggeered');
+    
+    var window = remote.getCurrentWindow();
+    window.close()
+})
+
+updateBtn.addEventListener('click',function(){
+  
+    ipc.send('update-notify-value',document.getElementById('notifyVal').value)
+      var window = remote.getCurrentWindow();
+      window.close();
+
+})
+
+
+
+</script>
